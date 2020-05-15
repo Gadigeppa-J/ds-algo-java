@@ -1,0 +1,19 @@
+
+
+
+
+Given a number from 1 to 9 in string, and given X and find the Kth largest number.
+
+e.g. 
+String str = "1234567891'
+x=2
+[12345][67891]
+valid numbers = 16, 17, 18, 19, 11
+arrange these in ascending order and find the kth largest number
+
+
+
+
+
+If many characters appear the same number of times find the smallest one . Find the most repeated character in the string.
+

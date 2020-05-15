@@ -1,0 +1,115 @@
+/*
+1. Sum in a array which is equal to some value
+*/
+
+
+/*
+question: MaxRewards
+Input : 
+    a. NXN Grid
+    b. SRC, DST tuples(example  (0,0) and (N-1,N-1))
+    c. Instruction_set : Each cell can contain any one of the following values :
+          1 -> GoRight
+          2 -> GoDown
+          3 -> Both options available
+          
+Output : 
+    1. Total number of ways to reach from src to dst (M)
+    2. Max_Rewards possible (<int>)
+    
+Code below :
+[1, 2, 1],
+[2, 3, 2],
+[3, 1, 2]
+*/
+
+
+public class Solution{
+    
+    static int pathCount = 0;
+    
+    public static int findPaths(int[][]  matrix, int i, int j, int[] dst, int count){
+        
+        int m = matrix.length;
+        int n = matrix[0].length;
+        
+        if (i==dst[0] && j==dst[1]){
+             pathCount++;
+             return count;
+        }
+        
+        int val = matrix[i][j];
+        count+=val;
+        
+        if (val==1){
+            
+            // right                        
+            if (j==n-1){                
+                return -1;
+            }
+            
+            return findPaths(matrix, i, j+1, srcDst, count);
+            
+            
+            
+        }else if (val==2){
+            // down
+            if (i==m-1){                
+                return -1;
+            }
+            
+            return findPaths(matrix, i+1, j, srcDst, count);
+            
+        }else{
+            // both
+            
+            if (j==n-1 && i==m-1){                
+                return -1;
+            }
+            
+            int rightVal = 0;
+            int leftVal = 0;
+            
+            if (j==n-1){                
+                rightVal = -1;
+            }else{
+                rightVal = findPaths(matrix, i, j+1, srcDst, count);    
+            }
+
+
+            if (i==m-1){                
+                leftVal = -1;
+            }else{
+                leftVal = findPaths(matrix, i+1, j, srcDst, count);            
+            }
+            
+            return Math.max(rightVal, leftVal);
+        }
+        
+            
+    }
+    
+    
+    
+    public static void main(String[] args){
+        
+        /*
+        [1, 2, 1],
+        [2, 3, 2],
+        [3, 1, 2]*/
+        
+        int[][] matrix = new int[][]{{1, 2, 1}, {2, 3, 3}, {3, 1, 2}};
+        int[] srcDst = new int[]{{2, 2}};
+        
+        int maxVal = findPaths(matrix, 0, 0, srcDst, 0);
+        
+        System.out.println("maxVal: " + maxVal);
+        System.out.println("pathCount: " + pathCount);
+        
+        
+    }
+    
+}
+
+
+
